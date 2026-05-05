@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 import { Avatar } from "reshaped";
 import { useState, useRef, useEffect } from "react";
@@ -10,15 +11,19 @@ import NavLink from "../NavLink";
 import BookCallButton from "../BookCallButton";
 
 export default function NavBar() {
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { token, user, signout } = useAuth();
 
-  // Portfolio dropdown state
+  // Portfolio dropdown state (desktop)
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const portfolioRef = useRef<HTMLDivElement>(null);
+
+  // Portfolio accordion state (mobile sidebar — separate to avoid outside-click conflict)
+  const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -200,12 +205,12 @@ export default function NavBar() {
           {/* Portfolio Accordion */}
           <div>
             <button
-              onClick={() => setPortfolioOpen(!portfolioOpen)}
+              onClick={() => setMobilePortfolioOpen(!mobilePortfolioOpen)}
               className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium transition-all duration-200 text-white/50 hover:text-[#ffffff] rounded-xl hover:bg-white/[0.05] cursor-pointer"
             >
               Portfolio
               <svg
-                className={`w-3 h-3 transition-transform duration-200 ${portfolioOpen ? "rotate-180" : ""}`}
+                className={`w-3 h-3 transition-transform duration-200 ${mobilePortfolioOpen ? "rotate-180" : ""}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -215,36 +220,30 @@ export default function NavBar() {
               </svg>
             </button>
 
-            {portfolioOpen && (
+            {mobilePortfolioOpen && (
               <div className="ml-3 mt-1 flex flex-col gap-0.5">
-                <Link
-                  href="/portfolio/website-design"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors"
+                <button
+                  onClick={() => { router.push("/portfolio/website-design"); setMobileOpen(false); setMobilePortfolioOpen(false); }}
+                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors cursor-pointer w-full text-left"
                 >
-                  Website Design
-                </Link>
-                <Link
-                  href="/portfolio/app-design"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors"
+                  Website Designs
+                </button>
+                <button
+                  onClick={() => { router.push("/portfolio/app-design"); setMobileOpen(false); setMobilePortfolioOpen(false); }}
+                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors cursor-pointer w-full text-left"
                 >
-                  App Design
-                </Link>
+                  App Designs
+                </button>
 
-                <Link
-                  href="/portfolio/graphics-design"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors"
+                <button
+                  onClick={() => { router.push("/portfolio/graphics-design"); setMobileOpen(false); setMobilePortfolioOpen(false); }}
+                  className="flex items-center px-3 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/[0.05] rounded-xl transition-colors cursor-pointer w-full text-left"
                 >
-                  Graphics Design
-                </Link>
+                  Graphics Designs
+                </button>
               </div>
             )}
           </div>
-          <NavLink href="/blog" onClick={() => setMobileOpen(false)}>
-            Blog
-          </NavLink>
           <NavLink href="/contact" onClick={() => setMobileOpen(false)}>
             Contact
           </NavLink>

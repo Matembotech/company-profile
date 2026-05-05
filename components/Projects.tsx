@@ -9,7 +9,7 @@ const projects = [
     title: "Laki Construction co. ltd",
     description:
       "A professional and responsive construction company website built with HTML, CSS, and JavaScript. Features a clean design, service showcase, contact form, and optimized performance across all devices",
-    image: "/laki.png",
+    image: "/Laki.png", 
     tech: ["HTML", "CSS", "JavaScript"],
     liveDemo: "https://matembotech.github.io/Laki-construction-site/",
     github: "https://github.com/Matembotech/Laki-construction-site",
@@ -68,6 +68,7 @@ export default function Projects() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1c1c1c] to-transparent opacity-60" />
