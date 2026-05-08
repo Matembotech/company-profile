@@ -250,13 +250,13 @@ export default function HeroPage() {
           </p>
 
           <div className="hero-btn flex flex-col sm:flex-row gap-4 sm:gap-5 mt-8 sm:mt-10 w-full sm:w-auto">
-            <Link href="/dashboard">
+            <Link href="/contact">
               <button className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#0F9BD0] text-white font-bold block mx-auto md:mx-0 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer shadow-xl shadow-[#0F9BD0]/20 text-sm sm:text-base w-full sm:w-auto">
                 Start a Project{" "}
                 <ArrowRight className="inline-block ml-2 w-5 h-5" />
               </button>
             </Link>
-            <Link href="/project">
+            <Link href="/projects">
               <button className="px-8 sm:px-10 py-3.5 sm:py-4 text-white font-bold block mx-auto md:mx-0 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer shadow-xl shadow-[#0F9BD0]/20 hover:border-[#0F9BD0] hover:border-2 text-sm sm:text-base w-full sm:w-auto border border-white/20">
                 View Our Work
               </button>
